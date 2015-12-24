@@ -41,6 +41,10 @@ signalAt wire wirings = fromJust $ Map.lookup wire $ until (Map.member wire) (ca
 
 --
 
+rewiredSignal wirings = signalAt "a" $ Map.insert "b" (Const $ Value $ signalAt "a" wirings) wirings
+
+--
+
 data Operand = Value Word16
 	| Wire String
 	deriving Show
@@ -62,3 +66,4 @@ main = do
 	input <- readFile "input07.txt"
 	let parsed = parse input
 	putStrLn $ show $ signalAt "a" $ parsed
+	putStrLn $ show $ rewiredSignal $ parsed
